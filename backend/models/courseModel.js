@@ -36,4 +36,4 @@ const courseSchema = new mongoose.Schema({
 })
 
 // Export the Course model for use in other files
-export default mongoose.model('Course', courseSchema);
+export default mongoose.model("Course", courseSchema);
