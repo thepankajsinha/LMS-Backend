@@ -25,3 +25,22 @@ export const isAuth = async (req, res, next) => {
       return res.status(400).json({ error: error.message });
     }
   };
+
+
+export const isAdmin = async (req, res, next) => {
+  try {
+    // Check if user is authenticated
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized access" });
+    }
+    
+    // Check if user is admin
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ error: "You are not admin" });
+    }
+
+    next();
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
