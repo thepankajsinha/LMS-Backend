@@ -1,0 +1,101 @@
+/* Register.css */
+
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+
+
+
+
+
+
+/* New styles for the account prompt */
+.account-prompt {
+    text-align: center; /* Center the prompt */
+    margin-top: 15px; /* Add some spacing above */
+  }
+  
+  .account-prompt a {
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+  }
+  
+  .account-prompt a:hover {
+    text-decoration: underline; /* Underline on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .register-container {
+      margin: 20px;
+      padding: 15px;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  }

@@ -1,6 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/database.js';
+import cors from 'cors';
+
+
+
 
 //load environment variables from.env file
 dotenv.config(); 
@@ -15,8 +19,9 @@ const app = express();
 
 
 //middlewares
-app.use(express.json()); //use express.json middleware to parse json data from req.body
+app.use(express.json()); //It is used to parse json data from req.body
 app.use("/uploads",express.static("uploads"))
+app.use(cors());   //enable cors for cross-origin requests
 
 
 //import all routes
