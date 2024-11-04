@@ -1,0 +1,17 @@
+.course-heading{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+.course-heading h1{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #262526;
+}
+
+.course-heading span{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0146D1;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Auth.css';
 
-function OtpVerify() {
+function VerifyPage() {
   const [otp, setOtp] = useState('');
 
   const handleChange = (e) => {
@@ -35,4 +35,4 @@ function OtpVerify() {
   );
 }
 
-export default OtpVerify;
+export default VerifyPage;

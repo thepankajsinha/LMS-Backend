@@ -36,14 +36,14 @@ input {
 }
 
 input:focus {
-  border-color: #007bff;
+  border-color: #0146D1;
   outline: none;
 }
 
 .submit-button {
   width: 100%;
   padding: 10px;
-  background-color: #007bff;
+  background-color: #0146D1;
   color: white;
   border: none;
   border-radius: 4px;
@@ -54,7 +54,7 @@ input:focus {
 }
 
 .submit-button:hover {
-  background-color: #0056b3;
+  background-color: #0146D1;
 }
 
 @media (max-width: 768px) {
@@ -67,8 +67,6 @@ input:focus {
     font-size: 1.5rem;
   }
 }
-
-
 
 
 

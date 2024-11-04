@@ -1,75 +1,52 @@
-/* Header.css */
-
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f8f9fa;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f7f9fc;
 }
 
-.log {
-  font-size: 1.5rem;
+.logo-text {
+  text-decoration: none;
+  font-size: 2rem;
   font-weight: bold;
-  color: #333;
+  color:#333333 ;
 }
 
-.link {
+
+.nav-links {
   display: flex;
   gap: 20px;
 }
 
-.link a {
+.nav-link {
   text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.sign-in {
+  border: 1px solid #0146D1;
+  background-color: transparent;
   color: #007bff;
-  font-size: 1rem;
-  transition: color 0.3s;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-.link a:hover {
-  color: #0056b3;
-}
-
-/* Button styles */
-.button {
-  padding: 10px 15px;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.login {
-  background-color: #007bff;
-  color: white;
-}
-
-.login:hover {
-  background-color: #0056b3;
-}
-
-.signup {
-  background-color: #28a745;
-  color: white;
-}
-
-.signup:hover {
-  background-color: #218838;
-}
-
-/* Responsive styling */
-@media (max-width: 768px) {
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .link {
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-  }
+.register {
+  background-color: #0146D1;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
 }

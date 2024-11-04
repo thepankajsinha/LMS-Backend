@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Auth.css';
 import { Link } from 'react-router-dom';
 
-function Register() {
+function RegisterPage() {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -69,4 +69,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterPage;
