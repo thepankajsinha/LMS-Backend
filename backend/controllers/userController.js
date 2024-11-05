@@ -48,6 +48,10 @@ export const register = async (req, res) => {
   }
 };
 
+
+
+
+
 export const verifyUser = async (req, res) => {
   try {
     const {otp, accessToken} = req.body;
@@ -80,6 +84,9 @@ export const verifyUser = async (req, res) => {
   }
 }
 
+
+
+
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -110,7 +117,14 @@ export const loginUser = async (req, res) => {
   }
 };
 
-export const myProfile = async (req, res) => {
+
+
+
+
+
+
+
+export const userProfile = async (req, res) => {
   try {
     // Check if req.user exists (set by isAuth middleware)
     if (!req.user) {

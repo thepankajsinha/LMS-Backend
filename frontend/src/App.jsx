@@ -10,8 +10,10 @@ import AccountPage from "./Pages/AccountPage/AccountPage";
 import LoginPage from "./Pages/AuthPages/LoginPage";
 import RegisterPage from "./Pages/AuthPages/RegisterPage";
 import VerifyPage from "./Pages/AuthPages/VerifyPage";
+import { UserData } from "./context/UserContext";
 
 function App() {
+  const {isAuth, user} = UserData();
   return (
     <div className="app-div">
       <BrowserRouter>
@@ -20,10 +22,10 @@ function App() {
           <Route path="/" element={<HomePage/>} />
           <Route path="/courses" element={<CoursePage/> } />
           <Route path="/about" element={<AboutPage/>} />
-          <Route path="/account" element={<AccountPage/>} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/register" element={<RegisterPage/>} />
-          <Route path="/verify" element={<VerifyPage/>} />
+          <Route path="/account" element={isAuth?<AccountPage user={user}/> : <LoginPage/>} />
+          <Route path="/login" element={isAuth?<HomePage/> : <LoginPage/>} />
+          <Route path="/register" element={isAuth?<HomePage/> : <RegisterPage/>} />
+          <Route path="/verify" element={isAuth?<HomePage/> : <VerifyPage/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

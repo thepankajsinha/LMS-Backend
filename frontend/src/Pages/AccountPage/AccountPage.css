@@ -37,6 +37,9 @@
 }
 
 .dashboard-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #0146D1;
     color: #fff;
     padding: 10px 20px;
@@ -46,6 +49,8 @@
     border-radius: 8px;
     cursor: pointer;
     width: 100%;
+    margin-bottom: 10px;
+    gap: 5px;
 }
 
 

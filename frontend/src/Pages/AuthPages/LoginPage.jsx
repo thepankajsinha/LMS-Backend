@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import './Auth.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserData } from '../../context/UserContext';
 
 function LoginPage() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+  const navigate = useNavigate()
+  const {loginUser} = UserData()
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle login logic (e.g., API call)
-    console.log('User logged in:', formData);
+    await loginUser(email, password, navigate);
+
   };
 
   return (
@@ -32,8 +25,8 @@ function LoginPage() {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -43,8 +36,8 @@ function LoginPage() {
             type="password"
             id="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
