@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './Auth.css';
+import { UserData } from '../../context/UserContext';
+import {useNavigate} from "react-router-dom"
 
 function VerifyPage() {
   const [otp, setOtp] = useState('');
+  const {verifyUser} = UserData();
+  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setOtp(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle OTP verification logic (e.g., API call)
-    console.log('OTP submitted:', otp);
+    await verifyUser(otp, navigate)
   };
 
   return (
@@ -21,11 +20,11 @@ function VerifyPage() {
         <div className="form-group">
           <label htmlFor="otp">Enter OTP</label>
           <input
-            type="text"
+            type="number"
             id="otp"
             name="otp"
             value={otp}
-            onChange={handleChange}
+            onChange={(e)=> setOtp(e.target.value)}
             required
           />
         </div>

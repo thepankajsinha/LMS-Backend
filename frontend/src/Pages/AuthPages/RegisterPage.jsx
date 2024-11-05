@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
 import './Auth.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserData } from '../../context/UserContext';
 
 function RegisterPage() {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  const navigate = useNavigate()
+  const {registerUser} = UserData()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle registration logic (e.g., API call)
-    console.log('User registered:', formData);
+    await registerUser(name,email, password, navigate);
+
   };
 
   return (
@@ -28,13 +21,13 @@ function RegisterPage() {
       <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="name">Name</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
+            id="name"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
@@ -44,8 +37,8 @@ function RegisterPage() {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -55,8 +48,8 @@ function RegisterPage() {
             type="password"
             id="password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>

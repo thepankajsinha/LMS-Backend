@@ -22,19 +22,16 @@ export const register = async (req, res) => {
         .status(400)
         .json({ error: "User with this email already exists" });
     }
-    console.log(existingUser);
 
     // Hash the password before saving to the database
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const otp = Math.floor(Math.random() * 1000000);
-    console.log("Generated OTP:", otp);
 
     const accessToken = jwt.sign(
       { name, email, password: hashedPassword,otp },process.env.SECRET_KEY,
       { expiresIn: "5m" }
     );
-    console.log(accessToken)
 
     const data = {
       name,
@@ -56,7 +53,6 @@ export const verifyUser = async (req, res) => {
   try {
     const {otp, accessToken} = req.body;
     const decodedAccessToken = jwt.verify(accessToken, process.env.SECRET_KEY);
-    console.log(decodedAccessToken)
 
     // Check if the OTP is provided
     if(!otp) {
