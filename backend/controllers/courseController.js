@@ -125,3 +125,18 @@ export const deleteCourse = async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 };
+
+
+
+
+
+
+
+export const getMyCourses = async (req, res) => {
+    try {
+        const courses = await Course.find({_id: req.user.subscription });
+        return res.json(courses);
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+}

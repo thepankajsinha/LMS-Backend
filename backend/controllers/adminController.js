@@ -1,5 +1,6 @@
 import Course from "../models/courseModel.js";
 import Lecture from "../models/lectureModel.js";
+import User from "../models/userModel.js";
 
 export const createCourse = async (req, res) => {
   try {
@@ -74,3 +75,20 @@ export const createLecture = async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 };
+
+
+export const getAllStats = async (req, res) => {
+  try {
+    const totalCourses = (await Course.find()).length;
+    const totalLectures = (await Lecture.find()).length;
+    const totalUsers = (await User.find()).length;
+    const stats ={
+      totalCourses,
+      totalLectures,
+      totalUsers,
+    }
+    res.json(stats);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
