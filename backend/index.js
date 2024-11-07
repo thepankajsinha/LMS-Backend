@@ -2,12 +2,18 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { connectDB } from './config/database.js';
 import cors from 'cors';
-
-
-
+import Razorpay from 'razorpay';
 
 //load environment variables from.env file
 dotenv.config(); 
+
+
+//payment gateway setup
+export const instance = new Razorpay({
+    key_id: process.env.RAZORPAY_API_KEY,
+    key_secret: process.env.RAZORPAY_API_SECRET,
+});
+
 
 
 //environment variables

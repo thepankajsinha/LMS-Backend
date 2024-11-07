@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllCourses, getAllLectures, getCourseByID, getLectureByID, getMyCourses } from '../controllers/courseController.js';
+import { checkout, getAllCourses, getAllLectures, getCourseByID, getLectureByID, getMyCourses, paymentVerification } from '../controllers/courseController.js';
 import {isAuth} from '../middlewares/isAuth.js'
 
 const router = express.Router();
@@ -9,6 +9,8 @@ router.get('/course/:CourseId', getCourseByID)
 router.get('/lectures/:CourseId',isAuth ,getAllLectures)
 router.get('/lecture/:LectureID',isAuth ,getLectureByID)
 router.get('/mycourse',isAuth ,getMyCourses)
+router.post('/course/checkout/:courseId',isAuth ,checkout)
+router.post('/verification/:courseId',isAuth , paymentVerification)
 
 
 export default router;

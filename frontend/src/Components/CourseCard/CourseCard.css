@@ -35,8 +35,8 @@
 
 .course-info {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    gap: 16px;
     margin-bottom: 10px;
 }
 
@@ -60,7 +60,7 @@
     margin-top: 8px;
 }
 
-.enroll-button {
+button {
     background-color: #0146D1;
     color: #fff;
     padding: 8px 20px;
