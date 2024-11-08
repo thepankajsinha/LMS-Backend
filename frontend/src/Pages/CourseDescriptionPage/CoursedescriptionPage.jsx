@@ -3,6 +3,7 @@ import "./CoursedescriptionPage.css";
 import { useParams, useNavigate} from "react-router-dom";
 import { CourseData } from "../../context/CourseContext";
 import { UserData } from "../../context/UserContext";
+import {toast} from "react-hot-toast";
 import axios from "axios";
 
 function CoursedescriptionPage({ user }) {
@@ -15,17 +16,14 @@ function CoursedescriptionPage({ user }) {
 
   useEffect(() => {
     getCourseByID(params.courseId);
-  }, [params.courseId]);
+  }, []);
 
   const checkoutHandler = async () => {
     const token = localStorage.getItem("token");
     setLoading(true);
-    if (!token) {
-      navigate("/login");
-      return;
-    }
+
     // Implement the logic to handle the checkout process
-    const {data:{order}} = await axios.post(`http://localhost:5000/api/course/checkout/${params.courseId}`, {}, {
+    const {data:{order},} = await axios.post(`http://localhost:5000/api/course/checkout/${params.courseId}`, {}, {
       headers: {
         token,
       },
@@ -37,7 +35,7 @@ function CoursedescriptionPage({ user }) {
       currency: "INR",
       name: "Learnify", //your business name
       description: "Just one step left to learn",
-      order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      order_id: order.id,
       
       handler: async function (response) {
         const{razorpay_order_id, razorpay_payment_id, razorpay_signature} = response;
@@ -53,11 +51,12 @@ function CoursedescriptionPage({ user }) {
           });
           await userProfile();
           await getAllCourses();
-          toastr.success(data.message);
+          toast.success(data.message);
           setLoading(false);
           navigate(`/payment-success/${razorpay_payment_id}`);
         } catch (error) {
           console.log(error.message);
+          setLoading(false);
         }
       },
       theme:{

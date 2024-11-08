@@ -13,7 +13,7 @@ const PaymentSuccessPage = ({user}) => {
         <h1>Payment Successful!</h1>
         <p>Thank you for your payment. Your transaction was completed successfully.</p>
         <p>Transaction ID: <strong>{params.id}</strong></p>
-        <Link to={`/${user._id}/dashboard`} className="home-button"><button>Go to Dashboard</button></Link>
+        <Link to={`/${user._id}/dashboard`} className="home-button">Go to Dashboard</Link>
       </div>
       )}
     </div>

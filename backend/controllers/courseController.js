@@ -149,7 +149,7 @@ export const getMyCourses = async (req, res) => {
 export const checkout = async (req, res) => {
     try {
         const user = await User.findById(req.user._id);
-        const course = await User.findById(req.params.courseId);
+        const course = await Course.findById(req.params.courseId);
 
         if(user.subscription.includes(course._id)){
             return res.status(400).json({ message: 'You are already enrolled in this course' });
@@ -167,6 +167,11 @@ export const checkout = async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 }
+
+
+
+
+
 
 
 export const paymentVerification = async (req, res) => {

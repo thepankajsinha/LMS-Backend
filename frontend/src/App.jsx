@@ -29,7 +29,7 @@ function App() {
           <Route path="/register" element={isAuth?<HomePage/> : <RegisterPage/>} />
           <Route path="/verify" element={isAuth?<HomePage/> : <VerifyPage/>} />
           <Route path="/course/:courseId" element={isAuth ? <CoursedescriptionPage user={user}/> : <LoginPage/>} />
-          <Route path="/payment-successs" element={isAuth ? <PaymentSuccessPage user={user}/> : <LoginPage/>} />
+          <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccessPage user={user}/> : <LoginPage/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

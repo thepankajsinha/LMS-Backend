@@ -44,6 +44,7 @@
   
   /* Home button styling */
   .home-button {
+    text-decoration: none;
     background-color: #4caf50;
     color: #ffffff;
     padding: 12px 24px;
