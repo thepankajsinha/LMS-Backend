@@ -7,7 +7,7 @@ export const UserContextProvider = ({children}) =>{
     const [user, setUser] = useState([]);
     const [isAuth, setIsAuth] = useState(false);
     //login user
-    async function loginUser(email, password, navigate) {
+    async function loginUser(email, password, navigate, getMyCourse) {
         try {
             const {data} = await axios.post("http://localhost:5000/api/user/login", {email, password});
             toast.success(data.message);
@@ -15,6 +15,7 @@ export const UserContextProvider = ({children}) =>{
             setUser(data.user);
             setIsAuth(true);
             navigate("/account");
+            getMyCourse();
             
         } catch (error) {
             console.log(error.message);

@@ -23,7 +23,7 @@ function AccountPage({user}) {
         <div className="profile-content">
           <h2 className="profile-name">{user.name}</h2>
           <p className="profile-email">{user.email}</p>
-          <button className="dashboard-button">Dashboard</button>
+          <button onClick={()=>navigate(`/${user._id}/dashboard`)} className="dashboard-button">Dashboard</button>
           <button onClick={logoutHandler} className="dashboard-button">Logout<IoMdLogOut /></button>
         </div>
       </div>)}

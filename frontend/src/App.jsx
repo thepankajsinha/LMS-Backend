@@ -13,6 +13,8 @@ import VerifyPage from "./Pages/AuthPages/VerifyPage";
 import { UserData } from "./context/UserContext";
 import CoursedescriptionPage from "./Pages/CourseDescriptionPage/CoursedescriptionPage";
 import PaymentSuccessPage from "./Pages/PaymentSuccessPage/PaymentSuccessPage";
+import DashboardPage from "./Pages/DashboardPage/DashboardPage";
+import StudyPage from "./Pages/StudyPage/StudyPage";
 
 function App() {
   const {isAuth, user} = UserData();
@@ -30,6 +32,8 @@ function App() {
           <Route path="/verify" element={isAuth?<HomePage/> : <VerifyPage/>} />
           <Route path="/course/:courseId" element={isAuth ? <CoursedescriptionPage user={user}/> : <LoginPage/>} />
           <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccessPage user={user}/> : <LoginPage/>} />
+          <Route path="/:userId/dashboard" element={isAuth ? <DashboardPage user={user}/> : <LoginPage/>} />
+          <Route path="/course/study/:courseId" element={isAuth ? <StudyPage user={user}/> : <LoginPage/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

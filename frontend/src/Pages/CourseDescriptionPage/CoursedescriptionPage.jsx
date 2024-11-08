@@ -11,7 +11,7 @@ function CoursedescriptionPage({ user }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const { course, getCourseByID, getAllCourses } = CourseData();
+  const { course, getCourseByID, getAllCourses, getMyCourse } = CourseData();
   const {userProfile} = UserData();
 
   useEffect(() => {
@@ -51,6 +51,7 @@ function CoursedescriptionPage({ user }) {
           });
           await userProfile();
           await getAllCourses();
+          await getMyCourse();
           toast.success(data.message);
           setLoading(false);
           navigate(`/payment-success/${razorpay_payment_id}`);
