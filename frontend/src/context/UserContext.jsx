@@ -60,7 +60,7 @@ export const UserContextProvider = ({children}) =>{
             const {data} = await axios.get("http://localhost:5000/api/user/profile",{headers:{
                 token: localStorage.getItem("token"),
             }});
-            setIsAuth(true);
+            setIsAuth(true); 
             setUser(data.user);
         } catch (error) {
             console.log(error.message);
@@ -71,7 +71,7 @@ export const UserContextProvider = ({children}) =>{
         userProfile();
     }, [])
     
-    return <UserContext.Provider value={{user, setUser, isAuth, setIsAuth, loginUser, registerUser,verifyUser }}>
+    return <UserContext.Provider value={{user, setUser, isAuth, setIsAuth, loginUser, registerUser,verifyUser , userProfile}}>
         {children}
         <Toaster/>
     </UserContext.Provider>

@@ -1,25 +1,81 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./CoursedescriptionPage.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate} from "react-router-dom";
 import { CourseData } from "../../context/CourseContext";
+import { UserData } from "../../context/UserContext";
+import axios from "axios";
 
 function CoursedescriptionPage({ user }) {
   const params = useParams();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const { course, getCourseByID } = CourseData();
+  const { course, getCourseByID, getAllCourses } = CourseData();
+  const {userProfile} = UserData();
 
   useEffect(() => {
     getCourseByID(params.courseId);
   }, [params.courseId]);
 
   const checkoutHandler = async () => {
+    const token = localStorage.getItem("token");
+    setLoading(true);
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     // Implement the logic to handle the checkout process
-    // This could involve sending a payment request to the backend or using a payment gateway
-    navigate(`/course/payment/${course._id}`);
+    const {data:{order}} = await axios.post(`http://localhost:5000/api/course/checkout/${params.courseId}`, {}, {
+      headers: {
+        token,
+      },
+    });
+
+    const options = {
+      key: "rzp_test_pvfszfNL3HPjDd",
+      amount: order.id, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      currency: "INR",
+      name: "Learnify", //your business name
+      description: "Just one step left to learn",
+      order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+      
+      handler: async function (response) {
+        const{razorpay_order_id, razorpay_payment_id, razorpay_signature} = response;
+        try {
+          const {data} = await axios.post(`http://localhost:5000/api/verification/${params.courseId}`, {
+            razorpay_order_id,
+            razorpay_payment_id,
+            razorpay_signature,
+          }, {
+            headers: {
+              token,
+            },
+          });
+          await userProfile();
+          await getAllCourses();
+          toastr.success(data.message);
+          setLoading(false);
+          navigate(`/payment-success/${razorpay_payment_id}`);
+        } catch (error) {
+          console.log(error.message);
+        }
+      },
+      theme:{
+        color: "#0146D1"
+      }
+    };
+
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
   };
+
+  
   return (
-    <div className="course-container">
+    <>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="course-container">
       <img
         src={`http://localhost:5000/${course.image}`}
         className="course-image"
@@ -41,7 +97,11 @@ function CoursedescriptionPage({ user }) {
         )}
       </div>
     </div>
+      )}
+    </>
   );
 }
 
 export default CoursedescriptionPage;
+
+

@@ -13,4 +13,4 @@ router.post('/course/checkout/:courseId',isAuth ,checkout)
 router.post('/verification/:courseId',isAuth , paymentVerification)
 
 
-export default router;
+export default router; 
