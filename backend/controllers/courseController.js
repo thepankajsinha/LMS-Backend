@@ -28,51 +28,74 @@ export const getCourseByID = async (req,res) =>{
 }
 
 
-export const getAllLectures = async (req,res) =>{
-    try{
-        const lectures = await Lecture.find({course: req.params.CourseId});
+export const getAllLectures = async (req, res) => {
+    try {
+        // Fetch all lectures for the given courseId
+        const lectures = await Lecture.find({ course: req.params.courseId });
         console.log(lectures);
 
+        // Fetch the user information from the database
         const user = await User.findById(req.user._id);
-        console.log(user)
+        console.log(user);
 
-        if(user.role === 'admin'){
-            return res.json({lectures});
+        // Check if the user is an admin
+        if (user.role === 'admin') {
+            return res.json({ lectures });
         }
 
-        if(!user.subscription.includes(lectures.course)){
-            return res.status(403).json({message: 'You are not subscribed to this course'});
+        // Check if the user is subscribed to the course
+        const courseId = req.params.courseId; // The courseId from the URL params
+        if (!user.subscription.includes(courseId)) {
+            return res.status(403).json({ message: 'You are not subscribed to this course' });
         }
-        return res.json({lectures});
-    }catch(error){
-        return res.status(400).json({error: error.message});
+
+        // If everything is fine, send the lectures
+        return res.json({ lectures });
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
     }
-}
+};
 
 
-export const getLectureByID = async (req,res) =>{
-    try{
-        const lecture = await Lecture.findById({_id: req.params.LectureID});
 
+export const getLectureByID = async (req, res) => {
+    try {
+        // Fetch the lecture by lectureId from the URL params
+        const lecture = await Lecture.findById(req.params.lectureId);
+        if (!lecture) {
+            return res.status(404).json({ message: "Lecture not found" });
+        }
+
+        // Retrieve user making the request
         const user = await User.findById(req.user._id);
-
-        if(user.role === 'admin'){
-            return res.json({lecture});
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
         }
 
-        if(!user.subscription.includes(req.params.id)){
-            return res.status(403).json({message: 'You are not subscribed to this course'});
+        // Admins can access any lecture
+        if (user.role === 'admin') {
+            return res.json({ lecture });
         }
-        return res.json({lecture});
-    }catch(error){
-        return res.status(400).json({error: error.message});
+
+        // Check if the user is subscribed to the course the lecture belongs to
+        if (!user.subscription.includes(lecture.course)) {
+            return res.status(403).json({ message: "You are not subscribed to this course" });
+        }
+
+        // If the user has a valid subscription, return the lecture
+        return res.json({ lecture });
+        
+    } catch (error) {
+        console.error("Error fetching lecture by ID:", error); // Log detailed error
+        return res.status(400).json({ error: error.message });
     }
-}
+};
+
 
 
 export const deleteLecture = async (req, res) => {
     try {
-        const lecture = await Lecture.findById(req.params.LectureID);
+        const lecture = await Lecture.findById(req.params.lectureId);
 
         if (!lecture) {
             return res.status(404).json({ error: "Lecture not found" });

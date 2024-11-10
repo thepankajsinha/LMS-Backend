@@ -15,6 +15,7 @@ import CoursedescriptionPage from "./Pages/CourseDescriptionPage/Coursedescripti
 import PaymentSuccessPage from "./Pages/PaymentSuccessPage/PaymentSuccessPage";
 import DashboardPage from "./Pages/DashboardPage/DashboardPage";
 import StudyPage from "./Pages/StudyPage/StudyPage";
+import LecturePage from "./Pages/LecturePage/LecturePage";
 
 function App() {
   const {isAuth, user} = UserData();
@@ -34,6 +35,7 @@ function App() {
           <Route path="/payment-success/:id" element={isAuth ? <PaymentSuccessPage user={user}/> : <LoginPage/>} />
           <Route path="/:userId/dashboard" element={isAuth ? <DashboardPage user={user}/> : <LoginPage/>} />
           <Route path="/course/study/:courseId" element={isAuth ? <StudyPage user={user}/> : <LoginPage/>} />
+          <Route path="/lectures/:courseId" element={isAuth ? <LecturePage user={user}/> : <LoginPage/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
